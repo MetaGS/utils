@@ -72,11 +72,14 @@
       
 
       //centering
-      tooltip.style.left = elemPosition.left + elemPosition.width/2 - tooltip.offsetWidth/2 +'px';
+      let left = elemPosition.left + elemPosition.width/2 - tooltip.offsetWidth/2 +'px';
+      
 
       if (tooltip.offsetLeft < 0) {
-        tooltip.style.left = elemPosition.left + 'px';
+        left = elemPosition.left + 'px';
       }
+      
+      tooltip.style.left = left;
 
 
 
