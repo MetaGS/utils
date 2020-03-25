@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      height: 2000px;
+      /* make body scrollable, the tooltip should work after the scroll */
+    }
+
+    .tooltip {
+      /* some styles for the tooltip, you can use your own instead */
+      position: fixed;
+      padding: 10px 20px;
+      border: 1px solid #b3c9ce;
+      border-radius: 4px;
+      text-align: center;
+      font: italic 14px/1.3 sans-serif;
+      color: #333;
+      background: #fff;
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <p>LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa</p>
+  <p>LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa</p>
+
+  <button data-tooltip="the tooltip is longer than the element">Short button</button>
+  <button data-tooltip="HTML<br>tooltip">One more button</button>
+
+
+  <script>
+
+    document.body.addEventListener(
+      'mouseover',
+      function(event) {
+        //console.log('start');
+
+        let tooltipData = event.target.dataset.tooltip;
+        
+        if ( tooltipData === undefined ) {
+          return;
+        }
+        
+
+        toggleTooltip(event.target, tooltipData)
+
+      }
+    );
+    document.body.addEventListener('mouseout',
+      function(event) {
+        let isThereTooltip = document.querySelector('.tooltip');
+        if(isThereTooltip) isThereTooltip.remove();
+      }
+    );
+
+    function toggleTooltip(element, data) {
+      
+      const elemPosition = element.getBoundingClientRect();
+      console.log(elemPosition.x);
+
+      const tooltip = document.createElement('div');
+      tooltip.className = 'tooltip';
+      tooltip.innerHTML = data;
+      tooltip.style.position = 'fixed';
+      document.body.append(tooltip);
+      let tooltipPosition = tooltip.getBoundingClientRect();
+      
+
+      //centering
+      tooltip.style.left = elemPosition.left + elemPosition.width/2 - tooltip.offsetWidth/2 +'px';
+
+      if (tooltip.offsetLeft < 0) {
+        tooltip.style.left = elemPosition.left + 'px';
+      }
+
+
+
+      if(elemPosition.top < 50){
+        tooltip.style.top = elemPosition.bottom + 5 +'px';
+      } else {
+        tooltip.style.top = elemPosition.top - tooltip.offsetHeight - 5 +'px';
+      }
+    }
+
+  </script>
+</body>
+</html>
