@@ -89,7 +89,7 @@
   <style>
     body {
       height: 2000px;
-      /* the tooltip should work after page scroll too */
+    
     }
 
     .tooltip {
