@@ -1,6 +1,6 @@
 //<div id="view" class="view" tabindex="0">Text</div>
 
-const view = document.getElementById('view');
+    const view = document.getElementById('view');
    
 
     view.onfocus = function(event) {
@@ -8,7 +8,7 @@ const view = document.getElementById('view');
       const textarea = document.createElement('textarea');
       textarea.value = this.innerHTML;
       
-      textarea.className = 'view';
+      textarea.className = 'edit';
       view.replaceWith(textarea);
       textarea.focus();
       
